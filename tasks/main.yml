@@ -1,15 +1,19 @@
 - name: install oracle repo key
   apt_key:
     url: https://www.virtualbox.org/download/oracle_vbox_2016.asc
+  when: ansible_pkg_mgr == 'apt'
 
 - name: install repository
   apt_repository:
     repo: "deb https://download.virtualbox.org/virtualbox/debian {{ ansible_distribution_release }} contrib"
+  when: ansible_pkg_mgr == 'apt'
 
 - name: install dkms
   apt:
     pkg: dkms
+  when: ansible_pkg_mgr == 'apt'
 
 - name: install virtualbox
   apt:
     pkg: "virtualbox-{{ oracle_virtualbox_version }}"
+  when: ansible_pkg_mgr == 'apt'
